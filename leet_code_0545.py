@@ -58,11 +58,11 @@ class Solution:
         def _leaf(node):
             if node.left is None and node.right is None:
                 result.append(node.val)
-
-            if node.left:
-                _leaf(node.left)
-            if node.right:
-                _leaf(node.right)
+            else:
+                if node.left:
+                    _leaf(node.left)
+                if node.right:
+                    _leaf(node.right)
 
         def _right(node):
             if node.left is None and node.right is None:
