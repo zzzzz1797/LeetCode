@@ -9,6 +9,7 @@
         输入：root = [3,9,8,4,0,1,7]
         输出：[[4],[9],[3,0,1],[8],[7]]
 """
+import collections
 from typing import Optional, List
 
 
@@ -21,4 +22,21 @@ class TreeNode:
 
 class Solution:
     def verticalOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
-        pass
+        return self.answer_1(root)
+
+    def answer_1(self, root):
+        table = collections.defaultdict(list)
+
+        queue = collections.deque([(root, 0)])
+
+        while queue:
+            node, column = queue.popleft()
+
+            if not node:
+                continue
+
+            table[column].append(node.val)
+            queue.append((node.left, column - 1))
+            queue.append((node.right, column + 1))
+
+        return [table[i] for i in sorted(table)]
