@@ -39,8 +39,8 @@ class Solution:
         result = []
 
         for index in range(k):
-            left_diff = float("inf") if not smaller_stack else target - smaller_stack[0].val
-            right_diff = float("inf") if not larger_stack else larger_stack[0].val - target
+            left_diff = float("inf") if not smaller_stack else target - smaller_stack[-1].val
+            right_diff = float("inf") if not larger_stack else larger_stack[-1].val - target
 
             if left_diff <= right_diff:
                 node = smaller_stack.pop()
