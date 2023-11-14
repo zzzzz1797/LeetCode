@@ -34,34 +34,34 @@ class Solution:
 
     def answer_2(self, nums, target):
 
-        def _search_right():
+        def _search_left():
             start = 0
-            end = len(nums)
+            end = len(nums) - 1
 
-            while start < end:
+            while start <= end:
                 mid = (start + end) // 2
                 cmp_target = nums[mid]
                 if cmp_target == target:
-                    start = mid
+                    end = mid - 1
                 elif cmp_target < target:
-                    start = mid
+                    start = mid + 1
                 elif cmp_target > target:
                     end = mid - 1
             return start
 
-        def _search_left():
+        def _search_right():
             start = 0
-            end = len(nums)
+            end = len(nums) - 1
 
-            while start < end:
+            while start <= end:
                 mid = (start + end) // 2
                 cmp_target = nums[mid]
                 if cmp_target == target:
-                    end = mid
+                    start = mid + 1
                 elif cmp_target < target:
                     start = mid + 1
                 elif cmp_target > target:
-                    end = mid
+                    end = mid - 1
             return end
 
         left = _search_left()
@@ -71,5 +71,5 @@ class Solution:
 
 
 if __name__ == '__main__':
-    data = Solution().answer_2([2, 4, 5, 5, 5, 5, 5, 6, 6], 5)
+    data = Solution().answer_2([10, 100, 101, 101], 2)
     print(data)
