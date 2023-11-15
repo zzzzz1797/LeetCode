@@ -36,3 +36,23 @@ class Solution:
             else:
                 k -= loss
         return nums[length - 1] + k
+
+    def answer_2(self, nums, k):
+        length = len(nums)
+        left = 0
+        right = length - 1
+
+        if nums[right] - nums[left] - right < k:
+            return nums[left] + k + right
+
+        while left + 1 < right:
+            mid = (left + right) // 2
+
+            slot = nums[mid] - nums[left] - mid + left
+
+            if slot < k:
+                left = mid
+                k -= slot
+            else:
+                right = mid
+        return nums[left] + k
