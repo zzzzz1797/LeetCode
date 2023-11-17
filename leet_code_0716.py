@@ -28,6 +28,37 @@
             stk.top();     // 返回 5，[5] - 栈没有改变
 """
 
+from sortedcontainers import SortedList
+
+
+class MaxStackV1:
+
+    def __init__(self):
+        self._index = 0
+        self._storage = {}
+        self._sort_list = SortedList()
+
+    def push(self, x: int) -> None:
+        self._storage[self._index] = x
+        self._sort_list.add((x, self._index))
+        self._index += 1
+
+    def pop(self) -> int:
+        index, x = self._storage.popitem()
+        self._sort_list.remove((x, index))
+        return x
+
+    def top(self) -> int:
+        return next(reversed(self._storage.values()))
+
+    def peekMax(self) -> int:
+        return self._sort_list[-1][0]
+
+    def popMax(self) -> int:
+        x, index = self._sort_list.pop()
+        self._storage.pop(index)
+        return x
+
 
 class MaxStack:
 
@@ -62,17 +93,6 @@ class MaxStack:
 
 
 if __name__ == '__main__':
-    max_stack = MaxStack()
-
-    max_stack.push(1)
-    max_stack.push(2)
-
-    max_stack.push(5)
-
-    max_stack.push(4)
-
-    max_stack.push(3)
-
-    print(1)
-
-    max_stack.popMax()
+    node1 = Node(1)
+    node2 = Node(2)
+    node3 = Node(3)
